@@ -1,6 +1,7 @@
 package com.example.kiore.lab3;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
     EditText edtUser, edtPass;
     String user, pass;
+    String user1 = "admin";
+    String pass1 = "admin";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
         edtUser = findViewById(R.id.edtUsuario);
         edtPass = findViewById(R.id.edtClave);
+
+
     }
 
     public void Ingresar(View btnIngresar){
@@ -36,8 +41,10 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
 
-            if(user.equals("admin") && pass.equals("admin")){
+            if(user.equals(user1) && pass.equals(pass1)){
 
+                Intent login = new Intent(getApplicationContext(), Nuevo.class);
+                startActivity(login);
             }
             else{
                 AlertDialog.Builder alerta = new AlertDialog.Builder(this);
@@ -50,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
+                                edtUser.setText("");
+                                edtPass.setText("");
+                                edtUser.requestFocus();
                             }
                         });
 
@@ -57,9 +67,7 @@ public class MainActivity extends AppCompatActivity {
                AlertDialog alertD = alerta.create();
                alertD.show();
 
-                edtUser.setText("");
-                edtPass.setText("");
-                edtUser.requestFocus();
+
             }
             
         }
